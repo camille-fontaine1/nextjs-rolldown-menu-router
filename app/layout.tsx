@@ -18,7 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Nav />
-        <div className="pt-[80px]">{children}</div>
+        <div className="py-[80px]">{children}</div>
+        <footer className="bg-slate-800 text-white p-4">
+          UIcons by <a href="https://www.flaticon.com/uicons">Flaticon</a>
+        </footer>
       </body>
     </html>
   );

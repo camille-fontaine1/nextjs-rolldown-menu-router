@@ -21,13 +21,7 @@ export function MenuLink({
   return (
     <Link className={linkClassnames} href={href}>
       <span className="relative size-5">
-        <Image
-          src={icon}
-          fill={true}
-          alt=""
-          sizes="20px"
-          className="object-contain"
-        />
+        <Image src={icon} fill={true} alt="" sizes="20px" />
       </span>
       {children}
     </Link>

@@ -20,28 +20,14 @@ export function Nav() {
         <div>
           <div className="p-4 flex justify-between items-center z-50 relative bg-white">
             <Link href="/" className="relative size-10">
-              <Image
-                src="/icon.png"
-                alt=""
-                fill={true}
-                sizes="48px"
-                className="object-contain"
-                aria-hidden={true}
-              />
+              <Image src="/icon.png" alt="" width={40} height={40} />
               <span className="sr-only">Home</span>
             </Link>
             <button
               className="relative size-8"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <Image
-                src="/menu-burger.svg"
-                alt=""
-                fill={true}
-                sizes="48px"
-                className="object-contain"
-                aria-hidden={true}
-              />
+              <Image src="/menu-burger.svg" alt="" width={32} height={32} />
               <span className="sr-only">Open Menu</span>
             </button>
           </div>
