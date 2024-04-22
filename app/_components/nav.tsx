@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { RolldownMenu } from "./rolldown-menu";
 import { MenuLink } from "./menu-link";
 import FocusTrap from "focus-trap-react";
@@ -45,38 +45,40 @@ export function Nav() {
               <span className="sr-only">Open Menu</span>
             </button>
           </div>
-          <RolldownMenu
-            isOpen={isMenuOpen}
-            onClose={() => setIsMenuOpen(false)}
-          >
-            <ul className="mt-4 grid gap-4">
-              <li>
-                <MenuLink href="/" icon="house-chimney.svg" active>
-                  Home
-                </MenuLink>
-              </li>
-              <li>
-                <MenuLink href="/notifications" icon="bell.svg">
-                  Notifications
-                </MenuLink>
-              </li>
-              <li>
-                <MenuLink href="/" icon="settings.svg">
-                  Settings
-                </MenuLink>
-              </li>
-              <li>
-                <MenuLink href="/#contact-us" icon="headset.svg">
-                  Contact us
-                </MenuLink>
-              </li>
-              <li className="border-t border-slate-300 pt-4">
-                <MenuLink href="/" icon="sign-out-alt.svg">
-                  Log out
-                </MenuLink>
-              </li>
-            </ul>
-          </RolldownMenu>
+          <Suspense>
+            <RolldownMenu
+              isOpen={isMenuOpen}
+              onClose={() => setIsMenuOpen(false)}
+            >
+              <ul className="mt-4 grid gap-4">
+                <li>
+                  <MenuLink href="/" icon="house-chimney.svg" active>
+                    Home
+                  </MenuLink>
+                </li>
+                <li>
+                  <MenuLink href="/notifications" icon="bell.svg">
+                    Notifications
+                  </MenuLink>
+                </li>
+                <li>
+                  <MenuLink href="/" icon="settings.svg">
+                    Settings
+                  </MenuLink>
+                </li>
+                <li>
+                  <MenuLink href="/#contact-us" icon="headset.svg">
+                    Contact us
+                  </MenuLink>
+                </li>
+                <li className="border-t border-slate-300 pt-4">
+                  <MenuLink href="/" icon="sign-out-alt.svg">
+                    Log out
+                  </MenuLink>
+                </li>
+              </ul>
+            </RolldownMenu>
+          </Suspense>
         </div>
       </FocusTrap>
     </nav>
