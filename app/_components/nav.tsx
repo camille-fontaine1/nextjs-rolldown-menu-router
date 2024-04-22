@@ -11,7 +11,11 @@ export function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.querySelector("body")?.classList.toggle("overflow-hidden");
+    if (isMenuOpen) {
+      document.querySelector("body")?.classList.add("overflow-hidden");
+    } else {
+      document.querySelector("body")?.classList.remove("overflow-hidden");
+    }
   }, [isMenuOpen]);
 
   return (
@@ -28,7 +32,10 @@ export function Nav() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <Image src="/menu-burger.svg" alt="" width={32} height={32} />
-              <span className="sr-only">Open Menu</span>
+              <span className="sr-only">
+                {isMenuOpen && <>Close Menu</>}
+                {!isMenuOpen && <>Open Menu</>}
+              </span>
             </button>
           </div>
           <Suspense>
