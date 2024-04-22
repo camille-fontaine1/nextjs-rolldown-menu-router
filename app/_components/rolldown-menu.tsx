@@ -6,26 +6,29 @@ import classNames from "classnames";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
 }
 
-export function RolldownMenu({ isOpen, onClose, children }: Props) {
+export function RolldownMenu({
+  isOpen,
+  onClose,
+  children,
+}: React.PropsWithChildren & Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [hidden, setHidden] = useState(!isOpen);
-  const [visible, setVisible] = useState(false);
+  const [isRolledDown, setIsRolledDown] = useState(false);
   const titleId = useId();
   const rolldownMenuRef = useRef<HTMLDivElement | null>(null);
 
   const menuClasses = classNames(
     "fixed bg-white w-full h-full transition-transform duration-500",
-    { "-translate-y-full": !visible, "translate-y-0": visible },
+    { "-translate-y-full": !isRolledDown, "translate-y-0": isRolledDown },
     { hidden: hidden }
   );
 
   useEffect(() => {
-    // Close the rolldown menu when navigating to the previous page
+    // Close the rolldown menu when the browser's back button has been pressed
     if (isOpen && !searchParams.has("open-menu")) {
       onClose();
     }
@@ -41,16 +44,18 @@ export function RolldownMenu({ isOpen, onClose, children }: Props) {
 
   function showMenu() {
     router.push("?open-menu=true");
+    // Remove 'display: none;' from the menu's styles before adding `translateY()` to allow the animation to work
     setHidden(false);
     setTimeout(() => {
-      setVisible(true);
+      setIsRolledDown(true);
       rolldownMenuRef.current?.focus();
     }, 0);
   }
 
   function hideMenu() {
-    setVisible(false);
+    setIsRolledDown(false);
     setTimeout(() => {
+      // After the roll-up animation has completed, add 'display: none;' to the menu's styles so that it cannot be reached by keyboard navigation
       setHidden(true);
     }, 500);
   }
